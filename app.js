@@ -21,7 +21,16 @@ const app = express();
 app.use(cors())
 
 
-
+app.use((req, res, next) => {
+  // Allow requests from any origin
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Allow specified HTTP methods
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  // Allow specified headers
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  // Continue to the next middleware
+  next();
+});
 
 
 
