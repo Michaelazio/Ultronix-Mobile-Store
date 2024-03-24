@@ -1,7 +1,7 @@
 import express from "express";
  import {apiRouter} from "./routes/api/v1/index.js";
 
-import clientRouter from "./routes/home/index.js";
+
 import compression from "compression";
 import { connectToDb } from "./db/index.js";
 import morgan from "morgan";
@@ -17,13 +17,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // Express app instance 
 const app = express();
 
-const corsURL = `${process.env.CORS_URL} `
-app.use(cors({
-  origin : corsURL 
-}));
 
-// For Client Sided Static Files (React App)
-app.use(express.static(join(__dirname, "client")));
+app.use(cors("*"))
+
+
+
+
 
 
 
@@ -43,7 +42,7 @@ app.use(morgan(":method :url :status :response-time ms - :res[content-length]"))
 
 // For All Routes
 app.use('/api/v1', apiRouter);
-app.use('/', clientRouter);
+
 const PORT = process.env.PORT || "http://localhost:3030";
 
 
